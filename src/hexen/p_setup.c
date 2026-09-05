@@ -726,6 +726,10 @@ void P_SetupLevel(int episode, int map, int playermask, skill_t skill)
         S_StartSongName("chess", true);
     }
 
+    // make sure all sounds are stopped before Z_FreeTags
+    S_StopAllSound();
+    SN_StopAllSequences();
+
     Z_FreeTags(PU_LEVEL, PU_PURGELEVEL - 1);
 
     P_InitThinkers();
@@ -817,8 +821,6 @@ void P_SetupLevel(int episode, int map, int playermask, skill_t skill)
     // Check if the level is a lightning level
     P_InitLightning();
 
-    S_StopAllSound();
-    SN_StopAllSequences();
     S_StartSong(gamemap, true);
 
 //printf ("free memory: 0x%x\n", Z_FreeMemory());
